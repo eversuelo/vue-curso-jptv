@@ -3,6 +3,6 @@
 </script>
 <template>
     <main>
-        <h1>Vue BIenes Raices</h1>
+        <h1 class="text-center">Vue Bienes Raices</h1>
     </main>
 </template>

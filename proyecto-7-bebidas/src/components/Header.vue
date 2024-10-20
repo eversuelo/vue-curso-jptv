@@ -2,11 +2,18 @@
 import { computed } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router';
 import {useBebidasStore} from '../stores/bebidas';
+import { useNotificacionesStore } from '../stores/notificaciones';
 const route=useRoute();
 const store=useBebidasStore();
 const paginaInicio=computed(()=>route.name==='inicio');
-
+const notificaciones=useNotificacionesStore();
 const handleSubmit=()=>{
+    if(store.busqueda.nombre.trim()==='' && store.busqueda.categoria.trim()===''){
+        notificaciones.texto='Debes ingresar un nombre o ingrediente o seleccionar una categoría','error';
+        notificaciones.mostrar=true;
+        notificaciones.error=true;
+        return;
+    }
     store.obtenerRecetas();
 }
 
@@ -24,12 +31,13 @@ const handleSubmit=()=>{
                         </RouterLink>
                     </div>
                     <nav class="flex gap-4">
-                        <RouterLink :to="{name:'inicio'}" active-class="text-orange-500"  class="font-bold text-white uppercase">
-                            Inicio 
+                        <RouterLink :to="{name:'inicio'}"  class="p-3 font-bold text-white uppercase rounded-xl " active-class="bg-blue-600 text-organge-500">
+                            Inicio
                         </RouterLink>
-                        <RouterLink :to="{name:'favoritos'}" active-class="text-organge-500" class="font-bold text-white uppercase">
+                        <RouterLink :to="{name:'favoritos'}"  class="p-3 font-bold text-white uppercase rounded-xl " active-class="bg-blue-600 text-organge-500">
                             Favoritos
                         </RouterLink>
+                        
                     </nav>
             </div>
             <form @submit.prevent="handleSubmit" v-if="paginaInicio" class="p-12 my-12 space-y-6 bg-orange-400 rounded-lg shadow md:w-1/2 2xl:w-1/3">

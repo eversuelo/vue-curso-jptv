@@ -1,0 +1,21 @@
+{
+  "name": "app_salon_backend",
+  "version": "1.0.0",
+  "description": "Back End de App Salón",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "seed:destroy": "node  data/seed.js --destroy",
+    "seed:import": "node  data/seed.js --import"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2",
+    "moongose": "^1.0.0"
+  }
+}
